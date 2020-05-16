@@ -16,7 +16,7 @@
             #pragma fragment frag
 
             #include "UnityCG.cginc"
-            #include "Lighting.cginc" //Import some of tge Unity lighting functionality
+            #include "Lighting.cginc" //Import some of the Unity lighting functionality
 
             struct VertexInput
             {
@@ -64,16 +64,14 @@
                 float3 viewDirection = normalize(camPos - i.worldPos); //Here the "worldPos" is the position of the fragment being processed
                 float3 viewReflect = reflect(-viewDirection, normal); //Reflect an incoming vector based on a normal
 
-                float3 specular = max(0, dot(viewReflect, lightDir));
-                specular = pow(specular, _Gloss);
-
-                return fixed4(specular.xxx, 0);
+                float3 specularFalloff = max(0, dot(viewReflect, lightDir));
+                float3 specular = pow(specularFalloff, _Gloss) * lightColor;
 
                 //Light composition
-                float3 finalLightColor = diffuse + ambientLightColor;
+                float3 finalDiffuseColor = diffuse + ambientLightColor;
 
                 //Actual surface color
-                float3 surfaceColor = finalLightColor * _Color;
+                float3 surfaceColor = finalDiffuseColor * _Color + specular;
 
                 return fixed4(surfaceColor, 0);
             }
