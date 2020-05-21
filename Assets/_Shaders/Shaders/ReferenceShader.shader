@@ -48,6 +48,9 @@ Shader "Custom Shaders/ReferenceShader"
 			{
 				//The declaration works just like the Vertex input, but now the property we want to take are for the Fragment Shader. The list of available values can be found on:
 				//https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-semantics#pixel-shader-semantics
+				//We can also use what's called an "Interpolator", which represets a interpolated value between each vertex that is given to the fragment shader. Usually you use them
+				//by setting the value as "TEXCOORDn", in which [n] is a number: Ex:
+				//		float2 varName: TEXTCOORD0
 				float4 pos : SV_POSITION;
 			};
 
