@@ -3,6 +3,7 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Tint ("Tint", Color) = (0, 0, 0, 1)
         _OutlineColor ("Outline Color", Color) = (0, 0, 0, 1)
         _OutlineSize ("Outline Size", Range(1, 5)) = 1.1
     }
@@ -74,6 +75,7 @@
             };
 
             sampler2D _MainTex;
+            float4 _Tint;
 
             VertexOutput vert (VertexInput v)
             {
@@ -85,7 +87,7 @@
 
             float4 frag (VertexOutput o) : SV_TARGET
             {
-                float4 tex = tex2D(_MainTex, o.uv);
+                float4 tex = tex2D(_MainTex, o.uv) * _Tint;
 
                 return tex;
             }

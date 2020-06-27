@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Custom Shaders_SimpleUnlitWithOutline
-  m_Shader: {fileID: 4800000, guid: 9845806ae446fb441aeda2ccd08a8f9e, type: 3}
+  m_Name: Custom_SurfaceShaderTest
+  m_Shader: {fileID: 4800000, guid: 98b9de0343a24e148b7cc930100bbff9, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -24,7 +24,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _OutlineSize: 1.1
+    - _Glossiness: 0.5
+    - _Metallic: 0
+    - _vertOffset: 0.15
     m_Colors:
-    - _OutlineColor: {r: 1, g: 0.89758426, b: 0, a: 1}
-    - _Tint: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
