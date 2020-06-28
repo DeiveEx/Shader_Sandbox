@@ -57,7 +57,7 @@
                     offset.x = _Time.y;
                 }
 
-                fixed3 col = tex2D(_MainTex, twirl(i.uv, _CenterAndOffset.xy, _Strenght, offset));
+                fixed3 col = tex2D(_MainTex, twirl(i.uv, _Strenght, _CenterAndOffset.xy, offset));
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
