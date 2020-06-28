@@ -2,8 +2,8 @@
 {
     Properties
     {
-        _UseProjectionUV("use projection UV", Range(0, 1)) = 1
-        _Invert("Invert", Range(0, 1)) = 0
+        [IntRange] _UseProjectionUV("use projection UV", Range(0, 1)) = 1 //[IntRange] tells Unity that we want the inspector to allow only int values
+        [IntRange] _Invert("Invert", Range(0, 1)) = 0
     }
     SubShader
     {
