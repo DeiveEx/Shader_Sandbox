@@ -5,7 +5,8 @@
         _MainTex ("Texture", 2D) = "white" {}
         _Tint ("Tint", Color) = (0, 0, 0, 1)
         _OutlineColor ("Outline Color", Color) = (0, 0, 0, 1)
-        _OutlineSize ("Outline Size", Range(1, 5)) = 1.1
+        _OutlineSize ("Outline Size", Range(0, 5)) = 1
+        _UseNormalOrPosition("Use Normal Or Position", Range(0, 1)) = 0
     }
     SubShader
     {
@@ -28,6 +29,7 @@
             struct VertexInput
             {
                 float4 vertex: POSITION;
+                float3 normal: NORMAL;
             };
 
             struct VertexOutput
@@ -36,12 +38,14 @@
             };
 
             float4 _OutlineColor;
-            float _OutlineSize;
+            float _OutlineSize, _UseNormalOrPosition;
 
             VertexOutput vert (VertexInput v)
             {
                 VertexOutput o;
-                float4 hullVertex = v.vertex * _OutlineSize;
+                float4 normalVert = v.vertex + (float4(v.normal, 0) * _OutlineSize);
+                float4 posVert = v.vertex * (1 + _OutlineSize);
+                float4 hullVertex = lerp(normalVert, posVert, _UseNormalOrPosition);
                 o.pos = UnityObjectToClipPos(hullVertex);
                 return o;
             }

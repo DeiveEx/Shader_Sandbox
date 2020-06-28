@@ -13,7 +13,7 @@
 
         CGPROGRAM
         //Since we're modifying the vertices positions, we need to put "addshadow" to compensate for shadows
-        #pragma surface surf Standard addshadow  vertex:vert
+        #pragma surface surf Standard addshadow vertex:vert
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
@@ -34,7 +34,7 @@
             // put more per-instance properties here
         UNITY_INSTANCING_BUFFER_END(Props)
 
-        //On a surface shader, ou can still edit the vertex positions
+        //On a surface shader, you can still edit the vertex positions
         void vert (inout appdata_full v)
         {
             v.vertex.xyz += v.normal * _vertOffset;
