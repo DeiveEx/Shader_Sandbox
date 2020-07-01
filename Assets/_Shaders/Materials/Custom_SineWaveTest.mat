@@ -24,10 +24,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Frequency: 10
+    - _Frequency: 6.57
     - _Glossiness: 0.5
-    - _Magnitude: 0.3
+    - _Magnitude: 0.2
     - _Metallic: 0
-    - _Speed: 5
+    - _Speed: 7.97
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
