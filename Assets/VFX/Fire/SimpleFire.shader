@@ -21,7 +21,7 @@
     {
         Tags { "RenderType"="Opaque" "Queue"="Transparent" }
         Cull Off
-        //Blend SrcAlpha OneMinusSrcAlpha
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
@@ -69,8 +69,8 @@
                 float3 color;
 
                 float2 voronoiUV = float2(uv.x + (_Time.y * _SpeedAndSize.x), uv.y + (_Time.y * _SpeedAndSize.y));
-                voronoiUV.x = voronoiUV.x + sin(uv.y + (_Time.y * _Movement.x)) * _Movement.y;
-
+                voronoiUV.x = voronoiUV.x + sin((1 - uv.y) + (_Time.y * _Movement.x - (layerID * _LayerOffset))) * _Movement.y;
+                
                 voronoi(voronoiUV * _SpeedAndSize.zw, _Time.y * _OffsetSpeed + (layerID * _LayerOffset), value, cells, color);
 
                 value *= mask;
@@ -85,19 +85,19 @@
             
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = 0;
+                fixed3 col = 0;
 
                 float value = 0;
                 float2 uv = i.uv;
+                float lastValue = 0;
 
                 for(int i = 0; i < _Layers; i++){
-                    value += getLayer(uv, i);
-                    col = value * tex2D(_Colors, float2((1.0/4.0) * i, 0));
+                    value = getLayer(uv, i) - value;
+                    col += value * tex2D(_Colors, float2((1.0/4.0) * i, 0));
+                    lastValue += value;
                 }
 
-                clip(value - 1.0);
-
-                return col * _MainColor;
+                return float4(col, lastValue) * _MainColor;
             }
             ENDCG
         }
