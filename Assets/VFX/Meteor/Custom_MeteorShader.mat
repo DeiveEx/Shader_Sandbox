@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Camera Effects_ScannerWave
-  m_Shader: {fileID: 4800000, guid: c3315acf2e3a7d24ea393f6f758ed7d5, type: 3}
+  m_Name: Custom_MeteorShader
+  m_Shader: {fileID: 4800000, guid: 50f613181dd4e7b499ad3549921adc10, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -23,11 +23,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ScanTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _WavePos: 0
-    - _WaveSize: 13.67
-    m_Colors: []
+    - _Glossiness: 0.5
+    - _Metallic: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _PortalPosition: {r: -3, g: 5, b: 0, a: 0}
+    - _PortalYPosition: {r: 0, g: 1, b: 0, a: 0}

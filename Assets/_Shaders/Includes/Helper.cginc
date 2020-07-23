@@ -14,7 +14,7 @@ float2 randomVector2 (float2 UV, float offset) //This function was taken from Un
     return float2(sin(UV.y*+offset)*0.5+0.5, cos(UV.x*offset)*0.5+0.5);
 }
 
-void voronoi (in float2 x, in float offset, out float Out , out float cells, out float3 color)
+void voronoi (in float2 x, in float offset, out float value, out float cells, out float3 color)
 {
     float2 n = floor(x);
     float2 f = frac(x); 
@@ -40,7 +40,7 @@ void voronoi (in float2 x, in float offset, out float Out , out float cells, out
                 mr = r;
                 mg = g;
 
-                Out = d;
+                value = d;
                 cells = o.x;
             }
         }
@@ -218,7 +218,7 @@ float2 rotateDegrees(float2 UV, float Rotation, float2 Center = float2(0.5, 0.5)
     float2x2 rMatrix = float2x2(c, -s, s, c);
     rMatrix *= 0.5;
     rMatrix += 0.5;
-    rMatrix = rMatrix * 2 - 1;
+    rMatrix = rMatrix * 2.0 - 1.0;
     UV.xy = mul(UV.xy, rMatrix);
     UV += Center;
     return UV;
@@ -226,7 +226,7 @@ float2 rotateDegrees(float2 UV, float Rotation, float2 Center = float2(0.5, 0.5)
 
 //=== Polar Coordinates
 
-float2 polarCoordinates(float2 UV, float2 Center, float RadialScale, float LengthScale)
+float2 polarCoordinates(float2 UV, float RadialScale, float LengthScale, float2 Center = float2(0.5, 0.5))
 {
     float2 delta = UV - Center;
     float radius = length(delta) * 2 * RadialScale;
@@ -236,7 +236,7 @@ float2 polarCoordinates(float2 UV, float2 Center, float RadialScale, float Lengt
 
 //=== Radial Sheer
 
-float2 radialShear(float2 UV, float Strength, float2 Center = float2(0.5, 0.5), float2 Offset = float2(0, 0))
+float2 radialShear(float2 UV, float Strength, float2 Center = float2(0.5, 0.5), float2 Offset = float2(0.0, 0.0))
 {
     float2 delta = UV - Center;
     float delta2 = dot(delta.xy, delta.xy);
@@ -245,7 +245,7 @@ float2 radialShear(float2 UV, float Strength, float2 Center = float2(0.5, 0.5), 
 }
 
 //=== Twirl
-float2 twirl(float2 UV, float Strength, float2 Center = float2(0.5, 0.5), float2 Offset = float2(0, 0))
+float2 twirl(float2 UV, float Strength, float2 Center = float2(0.5, 0.5), float2 Offset = float2(0.0, 0.0))
 {
     float2 delta = UV - Center;
     float angle = Strength * length(delta);
