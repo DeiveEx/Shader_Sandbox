@@ -2,14 +2,31 @@
 {
     Properties
     {
-        _Size("Size", Range(-1, 1)) = 0
-        _Smoothness("Smoothness", Float) = 0
+        [Header(Basic Options)][Space]
+        [Enum(UnityEngine.Rendering.BlendMode)]_BlendModeSrc("Src Blend Mode", Float) = 0
+        [Enum(UnityEngine.Rendering.BlendMode)]_BlendModeDst("Dst Blend Mode", Float) = 0
+        [Enum(UnityEngine.Rendering.CullMode)]_CullMode("Cull Mode", Float) = 0
+
+        [Header(Shader Options)][Space]
+        [HDR]_Color("Color", Color) = (1, 1, 1, 1)
+        _Shape("Shape", Range(-1, 1)) = 0
+        _ShapeCurvature("Shape Curvature", Float) = 1
+        _SpeedAndSize("Speed and Size", Vector) = (0, 0, 0, 0)
+        [PowerSlider(3.0)]_Smoothness("Smoothness", Range(0, 1)) = 0
+
+        [Header(Debug)][Space]
+        [Toggle]_ShowMask("ShowMask", Float) = 0
+        [Toggle]_UseColorAsMask("use color as mask", Float) = 0
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
-        Cull Off
-        //Blend SrcAlpha OneMinusSrcAlpha
+        Tags { 
+            "RenderType"="Opaque"
+            "Queue"="Transparent"
+        }
+
+        Cull [_CullMode]
+        Blend [_BlendModeSrc] [_BlendModeDst]
 
         Pass
         {
@@ -32,7 +49,9 @@
                 float4 vertex : SV_POSITION;
             };
 
-            float _Size, _Smoothness;
+            float _Shape, _ShapeCurvature, _Smoothness;
+            float4 _Color, _SpeedAndSize;
+            float _ShowMask, _UseColorAsMask;
 
             v2f vert (appdata v)
             {
@@ -47,18 +66,28 @@
                 // sample the texture
                 fixed4 col = 0;
 
-                float mask = (1 - (i.uv.x +  + _Size)) + i.uv.y;
-                mask = saturate(pow(mask, _Smoothness));
+                float mask = (1 - (i.uv.x + _Shape)) + pow(i.uv.y, _ShapeCurvature);
+                mask = pow(saturate(mask), _Smoothness * 100);
+
+                if(_ShowMask){
+                    return float4(mask, mask, mask, 1);
+                }
 
                 //Voronoi
                 float value, cells;
                 float3 color;
 
-                voronoi(i.uv * 5, 10, value, cells, color);
+                float2 animUV = i.uv * _SpeedAndSize.zw + (_SpeedAndSize.xy * _Time.y);
 
-                col = mask * value;
+                voronoi(animUV, 10, value, cells, color);
 
-                return col;
+                col = mask * value * _Color;
+
+                if(_UseColorAsMask){
+                    return col;
+                }else{
+                    return float4(col.rgb, mask);
+                }
             }
             ENDCG
         }

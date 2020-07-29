@@ -2,18 +2,19 @@
 {
     Properties
     {
+        [Header(Colors)]
         [HDR]_MainColor("Main Color", Color) = (1, 1, 1, 1)
         _Colors("Colors", 2D) = "white" {}
         _Layers("Layers", Float) = 0
         _LayerOffset("Layers Offset", Float) = 0
         
-        [Space]
+        [Header(Layer Options)] [Space]
         _OffsetSpeed("Offset Speed", Float) = 5
         _Movement("Movement", Vector) = (1, 1, 1, 1)
         _SpeedAndSize("Speed and Size", Vector) = (1, 1, 1, 1)
         _Position("Position", Range(-1, 1)) = 0
         
-        [Space]
+        [Header(Misc)] [Space]
         _Clip("Clip", Range(0, 1)) = 0
         [MaterialToggle]_UseStep("Use Step", Float) = 0
     }

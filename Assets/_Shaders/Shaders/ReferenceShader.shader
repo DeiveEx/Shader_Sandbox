@@ -7,11 +7,14 @@ Shader "Custom Shaders/ReferenceShader"
 		/*
 		Each property is defined as:
 		
-				_VariableName ("Inspector label", VariableType) = (DefaultValue)
+				[OptionalAttribute]_VariableName ("Inspector label", VariableType) = (DefaultValue)
 		
 		Also, we DON'T use semicolons (;) at the end of each property
+		For a list of availbale attributes/Property Drawers, check the links:
+		https://docs.unity3d.com/Manual/SL-Properties.html
+		https://docs.unity3d.com/ScriptReference/MaterialPropertyDrawer.html
 		*/
-		_Color ("Main Color", Color) = (1, 1, 1, 1)
+		[HDR]_Color ("Main Color", Color) = (1, 1, 1, 1)
 	}
 
 	//A subshader is basically a shader code that is hardware dependent. That means tou can write different SubShaders for different devices

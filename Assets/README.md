@@ -1,0 +1,1 @@
+For an overview of what is an shader and useful links, check the "ReferenceShader.shader" file.
