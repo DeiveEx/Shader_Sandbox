@@ -8,6 +8,8 @@
         [Enum(UnityEngine.Rendering.CullMode)]_CullMode("Cull Mode", Float) = 0
 
         [Header(Shader Options)][Space]
+        [Toggle]_ReverseX("Reverse UV X", Float) = 0
+        [Toggle]_ReverseY("Reverse UV Y", Float) = 0
         [HDR]_Color("Color", Color) = (1, 1, 1, 1)
         _Shape("Shape", Range(-1, 1)) = 0
         _ShapeCurvature("Shape Curvature", Float) = 1
@@ -49,7 +51,7 @@
                 float4 vertex : SV_POSITION;
             };
 
-            float _Shape, _ShapeCurvature, _Smoothness;
+            float _Shape, _ShapeCurvature, _Smoothness, _ReverseX, _ReverseY;
             float4 _Color, _SpeedAndSize;
             float _ShowMask, _UseColorAsMask;
 
@@ -57,7 +59,7 @@
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = float2(_ReverseX ? 1 - v.uv.x : v.uv.x, _ReverseY ? 1 - v.uv.y : v.uv.y);
                 return o;
             }
 

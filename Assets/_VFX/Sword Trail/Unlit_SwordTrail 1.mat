@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_SwordTrail
+  m_Name: Unlit_SwordTrail 1
   m_Shader: {fileID: 4800000, guid: 6be7a7085d55d8245845e6a0cf1d3d2c, type: 3}
-  m_ShaderKeywords: _A_OFF _A_ON
+  m_ShaderKeywords: _A_OFF _A_ON _REVERSEY_ON _REVERVEUVX_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -30,10 +30,10 @@ Material:
     - _BlendModeSrc: 5
     - _CullMode: 0
     - _ReverseX: 0
-    - _ReverseY: 0
-    - _ReverveUVX: 0
+    - _ReverseY: 1
+    - _ReverveUVX: 1
     - _Shape: 0
-    - _ShapeCurvature: 3.09
+    - _ShapeCurvature: 4.01
     - _ShapeSize: 2.14
     - _Shininess: 0.113
     - _ShowMask: 0
@@ -43,6 +43,6 @@ Material:
     - _TestBlend: 6
     - _UseColorAsMask: 0
     m_Colors:
-    - _Color: {r: 0, g: 2.8705883, b: 4, a: 1}
+    - _Color: {r: 1.9422809, g: 4.0491004, b: 4.9610066, a: 1}
     - _Speed: {r: -1, g: 0, b: 0, a: 0}
-    - _SpeedAndSize: {r: -5, g: -5, b: 3, a: 3}
+    - _SpeedAndSize: {r: -5, g: -5, b: 1, a: 3}
