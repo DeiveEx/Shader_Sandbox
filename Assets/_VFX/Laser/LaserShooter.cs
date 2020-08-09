@@ -9,6 +9,7 @@ public class LaserShooter : MonoBehaviour
     public Transform laserHead;
     public Transform laserBody;
     public Transform laserTail;
+    public Material[] materialsToChange;
 
     private bool isShooting;
     private Vector3 laserSize;
@@ -52,22 +53,29 @@ public class LaserShooter : MonoBehaviour
                     //Sets the laser size
                     laserSize.z = Vector3.Distance(source.position, hit.point);
                     laserBody.localScale = laserSize;
-                    
+
+					//Updates the materials
+					for (int i = 0; i < materialsToChange.Length; i++)
+					{
+                        materialsToChange[i].SetFloat("_UVTiling", laserSize.z);
+                    }
+
+                    //Sets the flag to enable the laser object
                     isShooting = true;
                 }
             }
         }
 
-        //Enables/Disables the laser
-        if(isShooting && !laserBody.gameObject.activeSelf)
+		//Enables/Disables the laser
+		if (isShooting && !laserBody.gameObject.activeSelf)
 		{
-            laserBody.gameObject.SetActive(true);
+			laserBody.gameObject.SetActive(true);
 		}
-        else if (!isShooting && laserBody.gameObject.activeSelf)
+		else if (!isShooting && laserBody.gameObject.activeSelf)
 		{
-            laserBody.gameObject.SetActive(false);
-        }
-    }
+			laserBody.gameObject.SetActive(false);
+		}
+	}
 
     private bool GetMouseWorldPos(out Vector3 mouseWorldPos)
 	{

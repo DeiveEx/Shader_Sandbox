@@ -17,7 +17,7 @@ float2 randomVector2 (float2 UV, float offset) //This function was taken from Un
 void voronoi (in float2 x, in float offset, out float value, out float cells, out float3 color)
 {
     float2 n = floor(x);
-    float2 f = frac(x); 
+    float2 f = frac(x);
 
     //----------------------------------
     // first pass: regular voronoi

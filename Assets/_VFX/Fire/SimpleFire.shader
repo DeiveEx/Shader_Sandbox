@@ -1,4 +1,4 @@
-﻿Shader "Unlit/SimpleFire"
+﻿Shader "Custom/SimpleFire"
 {
     Properties
     {

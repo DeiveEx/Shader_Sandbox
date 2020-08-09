@@ -1,4 +1,4 @@
-﻿Shader "Unlit/SwordTrail"
+﻿Shader "Custom/SwordTrail"
 {
     Properties
     {
