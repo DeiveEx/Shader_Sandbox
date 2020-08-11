@@ -6,6 +6,7 @@ public class LaserShooter : MonoBehaviour
 {
     public Transform source;
     public Transform sourcePivot;
+    public GameObject laserParent;
     public Transform laserHead;
     public Transform laserBody;
     public Transform laserTail;
@@ -59,21 +60,21 @@ public class LaserShooter : MonoBehaviour
 					{
                         materialsToChange[i].SetFloat("_UVTiling", laserSize.z);
                     }
-
-                    //Sets the flag to enable the laser object
-                    isShooting = true;
                 }
+
+                //Sets the flag to enable the laser object
+                isShooting = true;
             }
         }
 
 		//Enables/Disables the laser
-		if (isShooting && !laserBody.gameObject.activeSelf)
+		if (isShooting && !laserParent.gameObject.activeSelf)
 		{
-			laserBody.gameObject.SetActive(true);
+            laserParent.gameObject.SetActive(true);
 		}
 		else if (!isShooting && laserBody.gameObject.activeSelf)
 		{
-			laserBody.gameObject.SetActive(false);
+            laserParent.gameObject.SetActive(false);
 		}
 	}
 
