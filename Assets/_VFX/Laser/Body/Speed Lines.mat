@@ -28,7 +28,7 @@ Material:
     - _BlendDst: 10
     - _BlendSrc: 5
     - _CullMode: 2
-    - _UVTiling: 9.109235
+    - _UVTiling: 6.1850896
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
