@@ -11,8 +11,8 @@
         [NoScaleOffset]_MainTex ("Texture", 2D) = "white" {}
         _ScaleAndSpeed ("Scale and Speed", Vector) = (1, 1, 0, 1)
         [Toggle]_BlackIsAlpha ("Use Texture Black as Alpha", Float) = 0
-        [Header(Automatic Values)]
-        _UVTiling ("UV Tiling", Float) = 1
+        
+        [HideInInspector]_UVTiling ("UV Tiling", Float) = 1 //We use this value to tile the texture based on the size of the laser
     }
     SubShader
     {
