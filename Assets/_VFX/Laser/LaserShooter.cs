@@ -13,13 +13,10 @@ public class LaserShooter : MonoBehaviour
 
 	private bool isShooting;
 	private Vector3 laserSize;
-	private ParticleSystem.Particle[] trailParticlesArray;
-	private int trailIndex;
 
 	private void Start()
 	{
 		laserSize = laserBody.localScale;
-		trailParticlesArray = new ParticleSystem.Particle[laserTrailParticles.main.maxParticles];
 		laserTrailParticles.Play();
 	}
 
@@ -64,22 +61,9 @@ public class LaserShooter : MonoBehaviour
 						materialsToChange[i].SetFloat("_UVTiling", laserSize.z);
 					}
 
-					//Updates the trail particles
-					laserTrailParticles.GetParticles(trailParticlesArray);
-					trailParticlesArray[trailIndex].position = hit.point + hit.normal * 0.1f;
-					trailParticlesArray[trailIndex].rotation3D = Quaternion.LookRotation(-hit.normal).eulerAngles;
-					trailParticlesArray[trailIndex].startSize = 1;
-					trailParticlesArray[trailIndex].startColor = Color.white;
-					trailParticlesArray[trailIndex].startLifetime = laserTrailParticles.main.startLifetime.constantMax;
-					trailParticlesArray[trailIndex].remainingLifetime = laserTrailParticles.main.startLifetime.constantMax;
-					laserTrailParticles.SetParticles(trailParticlesArray);
-
-					trailIndex++;
-
-					if (trailIndex >= trailParticlesArray.Length)
-					{
-						trailIndex = 0;
-					}
+					//Set the position of the laser trail
+					laserTrailParticles.transform.position = hit.point;
+					laserTrailParticles.transform.rotation = Quaternion.LookRotation(hit.normal);
 				}
 
 				//Sets the flag to enable the laser object
@@ -91,10 +75,12 @@ public class LaserShooter : MonoBehaviour
 		if (isShooting && !laserParent.gameObject.activeSelf)
 		{
 			laserParent.gameObject.SetActive(true);
+			laserTrailParticles.Play();
 		}
 		else if (!isShooting && laserBody.gameObject.activeSelf)
 		{
 			laserParent.gameObject.SetActive(false);
+			laserTrailParticles.Stop();
 		}
 	}
 
