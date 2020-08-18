@@ -1,4 +1,4 @@
-﻿Shader "Custom/Laser_Inner"
+﻿Shader "Custom/Laser_Shell"
 {
     Properties
     {
