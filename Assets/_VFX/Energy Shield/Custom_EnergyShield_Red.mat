@@ -31,6 +31,7 @@ Material:
     - _BlendDst: 10
     - _BlendSrc: 5
     - _BorderSize: 0.9
+    - _IntersectionSize: 2
     - _LineWaveSize: 0.99
     - _LineWaveSpeed: 2
     - _PulseShape: 1
@@ -39,4 +40,5 @@ Material:
     m_Colors:
     - _BorderColor: {r: 2.670157, g: 0, b: 0.027960133, a: 1}
     - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _IntersectionColor: {r: 3.5648696, g: 0, b: 0.055991765, a: 0.5019608}
     - _LineColor: {r: 2.2015848, g: 0, b: 0, a: 1}
