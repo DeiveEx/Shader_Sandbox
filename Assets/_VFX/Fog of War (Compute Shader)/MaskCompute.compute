@@ -1,0 +1,38 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels as you want
+#pragma kernel CSMain
+
+int _TextureSize, _CellCount;
+float _MapSize, _Radius, _Blend;
+
+//Buffer containing position (x,y) and visibility(z) of the cells we set in our script. 
+StructuredBuffer<float> _CellBuffer;
+RWTexture2D<float4> _MaskTexture; //Read/Write texture
+
+[numthreads(8,8,1)]//These are our worker groups (the threads where the kernel will be executed)
+void CSMain (uint3 id : SV_DispatchThreadID) //This is our kernel. The parameter is the ID of the thread this is executing, in 3 dimensions. That means we can access the id by using id.xyz (in this case we don't use z, so id.xy)
+{
+    //Set the value of the current texel to 0
+    _MaskTexture[id.xy] = float4(0, 0, 0, 0);
+
+    //We have to loop through all cells and compare the distance of the current texel with each cell to see if we enable or disable the mask
+    for (int i = 0; i < _CellCount; i++)
+    {
+        //Get the values back from the buffer
+        float x = _CellBuffer[i * 3 + 0];
+        float y = _CellBuffer[i * 3 + 1];
+        float visibility = _CellBuffer[i * 3 + 2];
+
+        float2 texelUVpos = id.xy / (float)_TextureSize; //Calculate the UV position of the current Texel
+        float2 cellCenterUVpos = float2(x, y) / _MapSize; //Calculate the UV position of the center of the current cell
+        float UVDistance = length(texelUVpos - cellCenterUVpos);
+
+        //Blend the mask using the visibility of the current cell
+        float value = smoothstep(_Radius + _Blend, _Radius, UVDistance) * visibility;
+
+        //If the mask was already set, we only want to set it again if it's larger than the current value
+        value = max(_MaskTexture[id.xy].r, value);
+
+        //Override the value of the current text with the new one
+        _MaskTexture[id.xy] = float4(value, value, value, 1);
+    }
+}
