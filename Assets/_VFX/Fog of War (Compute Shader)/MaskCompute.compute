@@ -5,10 +5,10 @@ int _TextureSize, _CellCount;
 float _MapSize, _Radius, _Blend;
 
 //Buffer containing position (x,y) and visibility(z) of the cells we set in our script. 
-StructuredBuffer<float> _CellBuffer;
-RWTexture2D<float4> _MaskTexture; //Read/Write texture
+StructuredBuffer<float> _CellBuffer; //We specify the type of value we're expecting
+RWTexture2D<float4> _MaskTexture; //Read/Write texture. We're saying here that each pixel has 4 channels, thus, float4
 
-[numthreads(8,8,1)]//These are our worker groups (the threads where the kernel will be executed)
+[numthreads(8,8,1)]//These are our worker groups (the threads where the kernel will be executed). According to Lucas, the total number of threads can't go over 1024 (8x8x1 = 64, so it's valid)
 void CSMain (uint3 id : SV_DispatchThreadID) //This is our kernel. The parameter is the ID of the thread this is executing, in 3 dimensions. That means we can access the id by using id.xyz (in this case we don't use z, so id.xy)
 {
     //Set the value of the current texel to 0
@@ -31,7 +31,7 @@ void CSMain (uint3 id : SV_DispatchThreadID) //This is our kernel. The parameter
 
         //If the mask was already set, we only want to set it again if it's larger than the current value
         value = max(_MaskTexture[id.xy].r, value);
-
+        
         //Override the value of the current text with the new one
         _MaskTexture[id.xy] = float4(value, value, value, 1);
     }

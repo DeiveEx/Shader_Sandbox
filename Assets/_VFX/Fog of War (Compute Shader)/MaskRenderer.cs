@@ -5,13 +5,14 @@ using UnityEngine;
 public class MaskRenderer : Singleton<MaskRenderer>
 {
 	public List<HexGridCell> cells = new List<HexGridCell>();
-	public ComputeShader computeShader;
+	public ComputeShader computeShader; //We're gonna use a compute shader to rewrite the texture every frame
 	[Range(64, 4096)]
 	public int textureSize = 1024;
 	public float mapSize;
 	public float radius = 1;
 	[Range(0, 1)]
 	public float blendDistance = 0.8f;
+	public float animDuration = 1;
 	public Material[] materials;
 
 	private bool isReady;
@@ -25,6 +26,7 @@ public class MaskRenderer : Singleton<MaskRenderer>
 	private readonly int blendID = Shader.PropertyToID("_Blend");
 	private readonly int maskTextureID = Shader.PropertyToID("_MaskTexture");
 	private readonly int cellBufferID = Shader.PropertyToID("_CellBuffer");
+	private readonly int offsetID = Shader.PropertyToID("_Offset");
 
 	private List<CellBufferEntry> bufferElements = new List<CellBufferEntry>();
 	private ComputeBuffer shaderBuffer;
@@ -90,6 +92,12 @@ public class MaskRenderer : Singleton<MaskRenderer>
 			entry.posY = cells[i].transform.localPosition.z;
 			entry.visibility = cells[i].visibility;
 			bufferElements[i] = entry;
+		}
+
+		//Updates the materials
+		for (int i = 0; i < materials.Length; i++)
+		{
+			materials[i].SetVector(offsetID, transform.position); //Add the position of this parent object, so we can move the map around freely
 		}
 
 		//Here we set the data of the compute buffer and then set the buffer into the compute shader.

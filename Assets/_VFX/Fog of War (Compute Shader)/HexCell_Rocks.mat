@@ -23,8 +23,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: 300387e44ecdd7343ac07b5cafbdc3bc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MapBackgroud:
+        m_Texture: {fileID: 2800000, guid: 1bcbfe1b9b82deb4e96cc34fec3d1fe2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MapTex:
+        m_Texture: {fileID: 2800000, guid: b6f903366db1e3e49a2cf067a5b55a9d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MaskTexture:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise:
+        m_Texture: {fileID: 2800000, guid: f4a0fa4cfb1949a4689555a5475b366f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - __MaskTexture:
@@ -32,5 +44,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _MapSize: 16
-    m_Colors: []
+    - _Cutoff: 0.3
+    - _MapSize: 10
+    m_Colors:
+    - _MapColor: {r: 0.8867924, g: 0.85850954, b: 0.74875396, a: 1}
+    - _MapEdgeColor: {r: 0.6792453, g: 0.54935116, b: 0.40049842, a: 1}
+    - _Offset: {r: -4.5, g: 0.5, b: -3.75, a: 0}

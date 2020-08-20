@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HexGridCell : MonoBehaviour
 {
-	public float animDuration = 1;
 	[Range(0, 1)]public float visibility;
 	public bool isVisible;
 
@@ -45,10 +44,10 @@ public class HexGridCell : MonoBehaviour
 		float timePassed = 0;
 		float start = visibility;
 
-		while(timePassed <= animDuration)
+		while(timePassed <= MaskRenderer.Instance.animDuration)
 		{
 			timePassed += Time.deltaTime;
-			visibility = Mathf.Lerp(start, target, timePassed / animDuration);
+			visibility = Mathf.Lerp(start, target, timePassed / MaskRenderer.Instance.animDuration);
 			yield return null;
 		}
 
