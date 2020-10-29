@@ -24,8 +24,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _DisplaceStrenght: -0.5
-    - _MaskSize: 2
+    - _DisplaceStrenght: -0.53
+    - _MaskSize: 1.8
     - _Rings: 5
-    - _Speed: -0.03
+    - _Speed: -0.37
     m_Colors: []
