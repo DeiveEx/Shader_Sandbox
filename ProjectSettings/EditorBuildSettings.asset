@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/VFX.unity
+    guid: bf52203843302ab4da4cd10c0ebf0527
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/CameraEffects.unity
+    guid: 847dfe7c54f49ba4cafe5de6360a2798
+  - enabled: 1
+    path: Assets/Scenes/ShaderTests.unity
+    guid: acd6848b34961924d82951ac3c4e5544
   m_configObjects: {}

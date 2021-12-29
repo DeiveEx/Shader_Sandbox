@@ -20,6 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _Size: 26.59
+    - _Size: 5
     - _Speed: 6.93
     m_Colors: []
+  m_BuildTextureStacks: []

@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Camera Effects_PokemonTransition
   m_Shader: {fileID: 4800000, guid: a54a5edbc455224448f0f31b172618c5, type: 3}
-  m_ShaderKeywords: _USEDISTORTION_ON
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -28,8 +28,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amount: 1
+    - _Amount: 0.0306395
     - _Fade: 0
-    - _UseDistortion: 1
+    - _UseDistortion: 0
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}

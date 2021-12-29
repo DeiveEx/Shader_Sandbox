@@ -66,7 +66,7 @@ public class MaskRenderer : Singleton<MaskRenderer>
 		}
 
 		/*Here we're creating the compute buffer. The first argument is the number of elemenets in total(in this case, the number of cells * the number of variables for each cell),
-		 and the second argument is the size in bytes of each element. To discover the sive of a type, we can use the command "sizeof" and pass the corresponding type as an argument.*/
+		 and the second argument is the size in bytes of each element. To discover the sive of a type, we can use the command "sizeof" and pass the corresponding type as an argument. We could also add the size of multiple types together as a int and use it (ex: int totalSize = sizeof(int) + sizeof(float) * 3;*/
 		shaderBuffer = new ComputeBuffer(bufferElements.Count * 3, sizeof(float));
 
 		isReady = true;
@@ -112,7 +112,7 @@ public class MaskRenderer : Singleton<MaskRenderer>
 		/*"Dispatch" executes the compute kernel in the shader.
 		 The other 3 parameters is how many worker groups we want in each dimension of our texture.
 		Since we're working with a 2D texture, we can set the Z value to 1.
-		For the X and Y axis, we can calculate the amount of workers by getting the texture size and dividing it by 8 (why? idk).
+		For the X and Y axis, we can calculate the amount of workers by getting the texture size and dividing it by 8 here (since each "block" in our shader have 8 threads).
 		This basically means we'll render 8x8 square of texels at once, until we cover the entire texture*/
 		computeShader.Dispatch(0, Mathf.CeilToInt(textureSize / 8.0f), Mathf.CeilToInt(textureSize / 8.0f), 1);
 	}
